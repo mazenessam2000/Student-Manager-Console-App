@@ -1,19 +1,18 @@
-﻿namespace Student_Manager_Console_App;
+﻿namespace StudentManagerApp;
 
 internal class Student
 {
     public string Name { get; set; }
-    private int grade;
+    private int _grade;
 
     public int Grade
     {
-        get => grade;
+        get => _grade;
         set
         {
-            if (value >= 0 && value <= 100)
-                grade = value;
-            else
-                throw new ArgumentOutOfRangeException("Grade must be between 0 - 100");
+            if (value is < 0 or > 100)
+                throw new ArgumentOutOfRangeException(nameof(Grade), "Grade must be between 0 - 100");
+            _grade = value;
         }
     }
 
@@ -21,5 +20,10 @@ internal class Student
     {
         Name = name;
         Grade = grade;
+    }
+
+    public override string ToString()
+    {
+        return $"Student: {Name}, Grade: {Grade}";
     }
 }
